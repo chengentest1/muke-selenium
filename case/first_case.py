@@ -2,16 +2,23 @@ from business.register_business import RegisterBusiness
 import HTMLTestRunner
 from selenium import webdriver
 import unittest,os,time
+from log.user_log1 import UserLog
+
 class FirstCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.file_name = "C:/Users/cheng/PycharmProjects/muke-selenium/report/test_login_email_error.png"
+        cls.log = UserLog()
+        cls.logger = cls.log.get_log()
     @classmethod
     def tearDownClass(cls):
-        cls.driver.close()
+        cls.log.close_handle()
     def setUp(self):
+        self.file_name = "C:/Users/cheng/PycharmProjects/muke-selenium/report/test_login_email_error.png"
         self.driver=webdriver.Chrome()
         self.driver.get('http://www.5itest.cn/register')
+        self.logger.info('this is Chrome')
+
         self.login=RegisterBusiness(self.driver)
     def tearDown(self):
         time.sleep(2)
@@ -26,7 +33,7 @@ class FirstCase(unittest.TestCase):
         self.assertFalse(email_error,'此条case执行失败')
         # if email_error==True:
         #     print('注册成功了，此条case执行失败')
-    @unittest.skip('跳过')
+
     def test_login_username_error(self):
         username_error = self.login.login_name_error('111@qq.com','ss','111111',self.file_name)
         if username_error ==True:

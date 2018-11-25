@@ -13,9 +13,9 @@ class RegisterHandle(object):
     def send_user_password(self,password):
         self.register_p.get_password_element().send_keys(password)
     #输入验证码
-    def send_user_code(self,file_name):
-        get_code_text = GetCode(self.driver)
-        code=get_code_text.code_online(file_name)
+    def send_user_code(self,code):
+        # get_code_text = GetCode(self.driver)
+        # code=get_code_text.code_online(file_name)
         self.register_p.get_code_element().send_keys(code)
     #获取文字
     def get_user_text(self,info,user_info):
