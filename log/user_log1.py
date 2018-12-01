@@ -26,3 +26,4 @@ class UserLog(object):
     def close_handle(self):
         self.file_handler.close()
         self.logger.removeHandler(self.file_handler)
+# if __name__ == '__main__':
